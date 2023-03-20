@@ -8,6 +8,7 @@ Suwandi Kurniawan - 1955617840-1140
 - **Challenge2** [challenge2.go] - *done* 
 - **Challenge3** [challenge3.go] - *done* 
 - **Challenge4** [challenge4.go] - *done* 
+- **Project1** [project1.go] - *done* 
 
 In the project directory, you can run:
 
