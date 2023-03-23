@@ -9,7 +9,7 @@ Suwandi Kurniawan - 1955617840-1140
 - **Challenge3** [challenge3.go] - *done* 
 - **Challenge4** [challenge4.go] - *done* 
 - **Project1** [project1.go] - *done* 
-- **Challenge5** [folder belajar-gin] = *done*
+- **Challenge5** [folder belajar-gin] - *done*
 
 In the project directory, you can run:
 
