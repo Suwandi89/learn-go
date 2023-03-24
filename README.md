@@ -10,6 +10,7 @@ Suwandi Kurniawan - 1955617840-1140
 - **Challenge4** [challenge4.go] - *done* 
 - **Project1** [project1.go] - *done* 
 - **Challenge5** [folder belajar-gin] - *done*
+- **Challenge6** [folder postgre-gin] - *done*
 
 In the project directory, you can run:
 
