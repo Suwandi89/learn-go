@@ -1,4 +1,4 @@
-module belajar-go
+module gin-gorm
 
 go 1.20
 
