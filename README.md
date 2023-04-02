@@ -12,6 +12,7 @@ Suwandi Kurniawan - 1955617840-1140
 - **Challenge5** [folder belajar-gin] - *done*
 - **Challenge6** [folder postgre-gin] - *done*
 - **Project2** [folder gin-gorm] - *done* 
+- **Challenge7** [folder challenge7] - *done*
 
 In the project directory, you can run:
 
