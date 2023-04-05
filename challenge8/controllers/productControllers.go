@@ -4,6 +4,7 @@ import (
 	"challenge8/database"
 	"challenge8/helpers"
 	"challenge8/models"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -69,6 +70,31 @@ func UpdateProduct(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, Product)
+}
+
+func GetAllProducts(c *gin.Context) {
+	db := database.GetDB()
+	userData := c.MustGet("userData").(jwt.MapClaims)
+	userRole := fmt.Sprint(userData["role"])
+	userID := uint(userData["id"].(float64))
+
+	allProducts := []models.Product{}
+
+	if userRole == "admin" {
+		db.Find(&allProducts)
+	} else {
+		db.Where("user_id = ?", userID).Find(&allProducts)
+	}
+
+	if len(allProducts) == 0 {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+			"error_status":  "No Products found",
+			"error_message": "There are no products found.",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, allProducts)
 }
 
 func GetProduct(c *gin.Context) {
