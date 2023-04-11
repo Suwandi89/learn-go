@@ -14,6 +14,7 @@ Suwandi Kurniawan - 1955617840-1140
 - **Project2** [folder gin-gorm] - *done* 
 - **Challenge7** [folder challenge7] - *done*
 - **Challenge8** [folder challenge8] - *done*
+- **Final Project** [folder mygram] - *in progress*
 
 In the project directory, you can run:
 
