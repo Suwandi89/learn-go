@@ -20,6 +20,18 @@ func CreateComment(c *gin.Context) {
 	Comment := models.Comment{}
 	userID := uint(userData["id"].(float64))
 
+	Photo := models.Photo{}
+
+	err := db.Select("user_id").First(&Photo, uint(photoId)).Error
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+			"error":   "Photo Not Found",
+			"message": "Photo doesn't exist, failed to create comment",
+		})
+		return
+	}
+
 	if contentType == appJson {
 		c.ShouldBindJSON(&Comment)
 	} else {
@@ -29,7 +41,7 @@ func CreateComment(c *gin.Context) {
 	Comment.UserID = userID
 	Comment.PhotoID = uint(photoId)
 
-	err := db.Debug().Create(&Comment).Error
+	err = db.Debug().Create(&Comment).Error
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
