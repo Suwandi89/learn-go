@@ -24,7 +24,7 @@ func StartApp() *gin.Engine {
 
 		photoRouter.GET("/getall", controllers.GetAllPhotos)
 
-		photoRouter.GET("/getone/:photoId", controllers.GetPhoto)
+		photoRouter.GET("/get/:photoId", controllers.GetPhoto)
 
 		photoRouter.PUT("/update/:photoId", middlewares.PhotoAuthorization(), controllers.UpdatePhoto)
 
@@ -45,6 +45,21 @@ func StartApp() *gin.Engine {
 		commentRouter.PUT("/update/:commentId", middlewares.CommentAuthorization(), controllers.UpdateComment)
 
 		commentRouter.DELETE("/delete/:commentId", middlewares.CommentAuthorization(), controllers.DeleteComment)
+
+	}
+
+	socmedRouter := r.Group("/socialmedia")
+	{
+		socmedRouter.Use(middlewares.Authentication())
+		socmedRouter.POST("/create", controllers.CreateSocialMedia)
+
+		socmedRouter.GET("/getall", controllers.GetAllSocialMedias)
+
+		socmedRouter.GET("/get/:socialMediaId", controllers.GetSocialMedia)
+
+		socmedRouter.PUT("/update/:socialMediaId", middlewares.SocialMediaAuthorization(), controllers.UpdateSocialMedia)
+
+		socmedRouter.DELETE("/delete/:socialMediaId", middlewares.SocialMediaAuthorization(), controllers.DeleteSocialMedia)
 
 	}
 
