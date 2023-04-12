@@ -29,7 +29,7 @@ func StartDB() {
 	}
 
 	fmt.Println("Sukses koneksi ke database")
-	db.Debug().AutoMigrate(models.User{})
+	db.Debug().AutoMigrate(models.User{}, models.Photo{}, models.Comment{})
 
 }
 
