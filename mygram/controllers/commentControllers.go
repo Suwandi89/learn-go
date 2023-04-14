@@ -23,7 +23,7 @@ import (
 // @Success 201 {object} models.Comment "Create comment success"
 // @Failure 401 "Unauthorized"
 // @Failure 404 "Photo Not Found"
-// @Router /comments/create [post]
+// @Router /comments/create/{photoId} [post]
 func CreateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
