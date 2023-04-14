@@ -11,6 +11,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreateSocialMedia godoc
+// @Summary Create social media
+// @Description Create social media of the user
+// @Tags social media
+// @Accept json
+// @Produce json
+// @Param name query string true "name"
+// @Param social_media_url query string true "social_media_url"
+// @Security BearerAuth
+// @Success 201 {object} models.SocialMedia "Create social media success"
+// @Failure 401 "Unauthorized"
+// @Router /socialmedia/create [post]
 func CreateSocialMedia(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -40,6 +52,17 @@ func CreateSocialMedia(c *gin.Context) {
 	c.JSON(http.StatusCreated, SocialMedia)
 }
 
+// GetAllSocialMedia godoc
+// @Summary Get all social media
+// @Description Get all social media in mygram
+// @Tags social media
+// @Accept json
+// @Produce json
+// @Security BearerAuth
+// @Success 200 {object} []models.SocialMedia "Get all social media success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Social Media Not Found"
+// @Router /socialmedia/getall [get]
 func GetAllSocialMedias(c *gin.Context) {
 	db := database.GetDB()
 	allSocialMedias := []models.SocialMedia{}
@@ -57,6 +80,18 @@ func GetAllSocialMedias(c *gin.Context) {
 	c.JSON(http.StatusOK, allSocialMedias)
 }
 
+// GetSocialMedia godoc
+// @Summary Get social media
+// @Description Get social media identified by given id
+// @Tags social media
+// @Accept json
+// @Produce json
+// @Param socialMediaId path int true "ID of the social media"
+// @Security BearerAuth
+// @Success 200 {object} models.SocialMedia "Get social media success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Social Media Not Found"
+// @Router /socialmedia/get/{socialMediaId} [get]
 func GetSocialMedia(c *gin.Context) {
 	db := database.GetDB()
 	SocialMedia := models.SocialMedia{}
@@ -78,6 +113,18 @@ func GetSocialMedia(c *gin.Context) {
 	c.JSON(http.StatusOK, SocialMedia)
 }
 
+// UpdateSocialMedia godoc
+// @Summary Update social media
+// @Description Update social media identified by given id
+// @Tags social media
+// @Accept json
+// @Produce json
+// @Param socialMediaId path int true "ID of the social media"
+// @Security BearerAuth
+// @Success 200 {object} models.SocialMedia "Update social media success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Social Media Not Found"
+// @Router /socialmedia/update/{socialMediaId} [put]
 func UpdateSocialMedia(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -109,6 +156,18 @@ func UpdateSocialMedia(c *gin.Context) {
 	c.JSON(http.StatusOK, SocialMedia)
 }
 
+// DeleteSocialMedia godoc
+// @Summary Delete social media
+// @Description Delete social media identified by given ID
+// @Tags social media
+// @Accept json
+// @Produce json
+// @Param socialMediaId path int true "ID of the social media"
+// @Security BearerAuth
+// @Success 200 {string} string "Delete social media success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Social Media Not Found"
+// @Router /socialmedia/delete/{socialMediaId} [delete]
 func DeleteSocialMedia(c *gin.Context) {
 	db := database.GetDB()
 	SocialMedia := models.SocialMedia{}

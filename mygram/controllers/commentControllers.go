@@ -11,6 +11,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreateComment godoc
+// @Summary Create comment
+// @Description Create comment for photo identified by given id
+// @Tags comment
+// @Accept json
+// @Produce json
+// @Param photoId path int true "ID of the photo"
+// @Param message query string true "message"
+// @Security BearerAuth
+// @Success 201 {object} models.Comment "Create comment success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Photo Not Found"
+// @Router /comments/create [post]
 func CreateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -54,6 +67,17 @@ func CreateComment(c *gin.Context) {
 	c.JSON(http.StatusCreated, Comment)
 }
 
+// GetAllComments godoc
+// @Summary Get all comments
+// @Description Get all comments in mygram
+// @Tags comment
+// @Accept json
+// @Produce json
+// @Security BearerAuth
+// @Success 200 {object} []models.Comment "Get all comments success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Comments Not Found"
+// @Router /comments/getall [get]
 func GetAllComments(c *gin.Context) {
 	db := database.GetDB()
 	allComments := []models.Comment{}
@@ -71,6 +95,18 @@ func GetAllComments(c *gin.Context) {
 	c.JSON(http.StatusOK, allComments)
 }
 
+// GetAllCommentsForPhoto godoc
+// @Summary Get all comments for specific photo
+// @Description Get all comments for photo with given id
+// @Tags comment
+// @Accept json
+// @Produce json
+// @Param photoId path int true "ID of the photo"
+// @Security BearerAuth
+// @Success 200 {object} []models.Comment "Get all comments success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Comments Not Found"
+// @Router /comments/getall/{photoId} [get]
 func GetAllCommentsForPhoto(c *gin.Context) {
 	db := database.GetDB()
 	photoId, _ := strconv.Atoi(c.Param("photoId"))
@@ -89,6 +125,18 @@ func GetAllCommentsForPhoto(c *gin.Context) {
 	c.JSON(http.StatusOK, allComments)
 }
 
+// GetComment godoc
+// @Summary Get comment
+// @Description Get comment identified by given id
+// @Tags comment
+// @Accept json
+// @Produce json
+// @Param commentId path int true "ID of the comment"
+// @Security BearerAuth
+// @Success 200 {object} models.Comment "Get comment success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Comment Not Found"
+// @Router /comments/get/{commentId} [get]
 func GetComment(c *gin.Context) {
 	db := database.GetDB()
 	Comment := models.Comment{}
@@ -110,6 +158,18 @@ func GetComment(c *gin.Context) {
 	c.JSON(http.StatusOK, Comment)
 }
 
+// UpdateComment godoc
+// @Summary Update comment
+// @Description Update comment identified by given id
+// @Tags comment
+// @Accept json
+// @Produce json
+// @Param commentId path int true "ID of the comment"
+// @Security BearerAuth
+// @Success 200 {object} models.Comment "Update comment success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Comment Not Found"
+// @Router /comments/update/{commentId} [put]
 func UpdateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -151,6 +211,18 @@ func UpdateComment(c *gin.Context) {
 	c.JSON(http.StatusOK, Comment)
 }
 
+// DeleteComment godoc
+// @Summary Delete comment
+// @Description Delete comment identified by given ID
+// @Tags comment
+// @Accept json
+// @Produce json
+// @Param commentId path int true "ID of the comment"
+// @Security BearerAuth
+// @Success 200 {string} string "Delete comment success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Comment Not Found"
+// @Router /comments/delete/{commentId} [delete]
 func DeleteComment(c *gin.Context) {
 	db := database.GetDB()
 	Comment := models.Comment{}

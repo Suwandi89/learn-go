@@ -11,6 +11,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreatePhoto godoc
+// @Summary Create photo
+// @Description Create photo to post in mygram
+// @Tags photo
+// @Accept json
+// @Produce json
+// @Param title query string true "title"
+// @Param caption query string false "caption"
+// @Param photo_url query string true "photo_url"
+// @Security BearerAuth
+// @Success 201 {object} models.Photo "Create photo success"
+// @Failure 401 "Unauthorized"
+// @Router /photos/create [post]
 func CreatePhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -40,6 +53,17 @@ func CreatePhoto(c *gin.Context) {
 	c.JSON(http.StatusCreated, Photo)
 }
 
+// GetAllPhotos godoc
+// @Summary Get all photos
+// @Description Get all existing photos
+// @Tags photo
+// @Accept json
+// @Produce json
+// @Security BearerAuth
+// @Success 200 {object} []models.Photo{} "Get all photos success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Photos Not Found"
+// @Router /photos/getall [get]
 func GetAllPhotos(c *gin.Context) {
 	db := database.GetDB()
 	allPhotos := []models.Photo{}
@@ -57,6 +81,18 @@ func GetAllPhotos(c *gin.Context) {
 	c.JSON(http.StatusOK, allPhotos)
 }
 
+// GetPhoto godoc
+// @Summary Get photo
+// @Description Get photo by ID
+// @Tags photo
+// @Accept json
+// @Produce json
+// @Param photoId path int true "ID of the photo"
+// @Security BearerAuth
+// @Success 200 {object} models.Photo{} "Get photo success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Photo Not Found"
+// @Router /photos/get/{photoId} [get]
 func GetPhoto(c *gin.Context) {
 	db := database.GetDB()
 	Photo := models.Photo{}
@@ -78,6 +114,18 @@ func GetPhoto(c *gin.Context) {
 	c.JSON(http.StatusOK, Photo)
 }
 
+// UpdatePhoto godoc
+// @Summary Update photo
+// @Description Update photo identified by given ID
+// @Tags photo
+// @Accept json
+// @Produce json
+// @Param photoId path int true "ID of the photo"
+// @Security BearerAuth
+// @Success 200 {object} models.Photo{} "Update photo success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Photo Not Found"
+// @Router /photos/update/{photoId} [put]
 func UpdatePhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -109,6 +157,18 @@ func UpdatePhoto(c *gin.Context) {
 	c.JSON(http.StatusOK, Photo)
 }
 
+// DeletePhoto godoc
+// @Summary Delete photo
+// @Description Delete photo identified by given ID
+// @Tags photo
+// @Accept json
+// @Produce json
+// @Param photoId path int true "ID of the photo"
+// @Security BearerAuth
+// @Success 200 {string} string "Delete photo success"
+// @Failure 401 "Unauthorized"
+// @Failure 404 "Photo Not Found"
+// @Router /photos/delete/{photoId} [delete]
 func DeletePhoto(c *gin.Context) {
 	db := database.GetDB()
 	Photo := models.Photo{}
